@@ -2,7 +2,7 @@ include ../../common/make.config
 
 CC := $(CUDA_DIR)/bin/nvcc
 
-INCLUDE := $(CUDA_DIR)/include
+INCLUDE := $(CUDA_DIR)/include --cudart shared
 
 SRC = bfs.cu
 

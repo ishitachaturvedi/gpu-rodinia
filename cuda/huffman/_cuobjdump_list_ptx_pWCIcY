@@ -1,0 +1,4 @@
+main_test_cu.sm_30.ptx
+vlc_kernel_sm64huff.sm_30.ptx
+scan.sm_30.ptx
+pack_kernels.sm_30.ptx

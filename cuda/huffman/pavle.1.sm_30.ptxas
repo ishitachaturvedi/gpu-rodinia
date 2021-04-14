@@ -1,0 +1,33 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z5pack2PjS_S_S_j' for 'sm_30'
+ptxas info    : Function properties for _Z5pack2PjS_S_S_j
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 26 registers, 356 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z7prescanILb0ELb1EEvPjPKjS0_iii' for 'sm_30'
+ptxas info    : Function properties for _Z7prescanILb0ELb1EEvPjPKjS0_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 14 registers, 356 bytes cmem[0], 4 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z7prescanILb0ELb0EEvPjPKjS0_iii' for 'sm_30'
+ptxas info    : Function properties for _Z7prescanILb0ELb0EEvPjPKjS0_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 13 registers, 356 bytes cmem[0], 4 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z7prescanILb1ELb1EEvPjPKjS0_iii' for 'sm_30'
+ptxas info    : Function properties for _Z7prescanILb1ELb1EEvPjPKjS0_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 14 registers, 356 bytes cmem[0], 4 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z7prescanILb1ELb0EEvPjPKjS0_iii' for 'sm_30'
+ptxas info    : Function properties for _Z7prescanILb1ELb0EEvPjPKjS0_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 13 registers, 356 bytes cmem[0], 4 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z10uniformAddPjS_iii' for 'sm_30'
+ptxas info    : Function properties for _Z10uniformAddPjS_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 10 registers, 16 bytes smem, 348 bytes cmem[0]
+ptxas info    : Compiling entry function '_Z26vlc_encode_kernel_sm64huffPjPKjS1_S_S_S_S_S_' for 'sm_30'
+ptxas info    : Function properties for _Z26vlc_encode_kernel_sm64huffPjPKjS1_S_S_S_S_S_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 19 registers, 16 bytes smem, 384 bytes cmem[0], 4 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z12histo_kernelPhlPj' for 'sm_30'
+ptxas info    : Function properties for _Z12histo_kernelPhlPj
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 7 registers, 1024 bytes smem, 344 bytes cmem[0]

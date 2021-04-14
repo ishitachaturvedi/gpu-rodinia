@@ -1,0 +1,5 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z26vlc_encode_kernel_sm64huffPjPKjS1_S_S_S_S_S_' for 'sm_30'
+ptxas info    : Function properties for _Z26vlc_encode_kernel_sm64huffPjPKjS1_S_S_S_S_S_
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 19 registers, 16 bytes smem, 384 bytes cmem[0], 4 bytes cmem[2]

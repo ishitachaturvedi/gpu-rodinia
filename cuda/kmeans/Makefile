@@ -6,7 +6,7 @@ CC_FLAGS = -g -fopenmp -O2
 
 # CUDA compiler
 NVCC = $(CUDA_DIR)/bin/nvcc
-NVCC_FLAGS = -I$(CUDA_DIR)/include 
+NVCC_FLAGS = -I$(CUDA_DIR)/include --cudart shared 
 
 # 'make dbg=1' enables NVCC debugging
 ifeq ($(dbg),1)
@@ -20,12 +20,15 @@ ifeq ($(emu),1)
 	NVCC_FLAGS += -deviceemu
 endif
 
-
 kmeans: cluster.o getopt.o kmeans.o kmeans_clustering.o kmeans_cuda.o rmse.o
-	$(CC) $(CC_FLAGS) cluster.o getopt.o kmeans.o kmeans_clustering.o kmeans_cuda.o rmse.o -o kmeans -L$(CUDA_LIB_DIR) -lcuda -lcudart -lm
+	$(CC) $(CC_FLAGS) cluster.o getopt.o kmeans.o kmeans_clustering.o kmeans_cuda.o rmse.o -o kmeans -L$(CUDA_LIB_DIR) -lcudart -lm
 
-%.o: %.[ch]
+%.o: %.c
 	$(CC) $(CC_FLAGS) $< -c
+
+SRC = $(wildcard *.c)               # list of source files
+OBJS = $(patsubst %.c, %.o, $(SRC)) # list of object files
+objs : $(OBJS)                      # target
 
 kmeans_cuda.o: kmeans_cuda.cu 
 	$(NVCC) $(NVCC_FLAGS) -c kmeans_cuda.cu

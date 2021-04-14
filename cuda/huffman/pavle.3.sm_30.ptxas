@@ -1,0 +1,21 @@
+ptxas info    : 0 bytes gmem
+ptxas info    : Compiling entry function '_Z7prescanILb0ELb1EEvPjPKjS0_iii' for 'sm_30'
+ptxas info    : Function properties for _Z7prescanILb0ELb1EEvPjPKjS0_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 14 registers, 356 bytes cmem[0], 4 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z7prescanILb0ELb0EEvPjPKjS0_iii' for 'sm_30'
+ptxas info    : Function properties for _Z7prescanILb0ELb0EEvPjPKjS0_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 13 registers, 356 bytes cmem[0], 4 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z7prescanILb1ELb1EEvPjPKjS0_iii' for 'sm_30'
+ptxas info    : Function properties for _Z7prescanILb1ELb1EEvPjPKjS0_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 14 registers, 356 bytes cmem[0], 4 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z7prescanILb1ELb0EEvPjPKjS0_iii' for 'sm_30'
+ptxas info    : Function properties for _Z7prescanILb1ELb0EEvPjPKjS0_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 13 registers, 356 bytes cmem[0], 4 bytes cmem[2]
+ptxas info    : Compiling entry function '_Z10uniformAddPjS_iii' for 'sm_30'
+ptxas info    : Function properties for _Z10uniformAddPjS_iii
+    0 bytes stack frame, 0 bytes spill stores, 0 bytes spill loads
+ptxas info    : Used 10 registers, 16 bytes smem, 348 bytes cmem[0]
