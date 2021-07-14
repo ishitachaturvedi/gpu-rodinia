@@ -1,6 +1,7 @@
 include ../../common/make.config
 
-CUDA_SDK_PATH := $(SDK_DIR)
+CUDA_SDK_PATH := /root/cuda/samples
+CUDA_LIB_PATH := /root/cuda/lib64
 
 # Determine the correct version of the cutil library
 CUTIL_LIB = # -lcutil
@@ -14,17 +15,17 @@ endif
 all: euler3d euler3d_double  pre_euler3d  pre_euler3d_double 
 
 euler3d: euler3d.cu
-	nvcc $(KERNEL_DIM) -O2 -Xptxas -v --gpu-architecture=compute_30 --gpu-code=compute_30 euler3d.cu -o euler3d -I$(CUDA_SDK_PATH)/common/inc  -L$(CUDA_SDK_PATH)/lib $(CUTIL_LIB)
+	nvcc $(KERNEL_DIM) -lcudart -O2 -Xptxas -v --gpu-architecture=compute_30 --gpu-code=compute_30 euler3d.cu -o euler3d -I$(CUDA_SDK_PATH)/common  -L$(CUDA_LIB_PATH) $(CUTIL_LIB)
 
 euler3d_double: euler3d_double.cu
-	nvcc -Xptxas -v -O3 --gpu-architecture=compute_30 --gpu-code=compute_30 euler3d_double.cu -o euler3d_double -I$(CUDA_SDK_PATH)/common/inc  -L$(CUDA_SDK_PATH)/lib $(CUTIL_LIB)
+	nvcc -Xptxas -v -O3 --gpu-architecture=compute_30 --gpu-code=compute_30 euler3d_double.cu -o euler3d_double -I$(CUDA_SDK_PATH)/common  -L$(CUDA_LIB_PATH) $(CUTIL_LIB)
 
 
 pre_euler3d: pre_euler3d.cu
-	nvcc -Xptxas -v -O3 --gpu-architecture=compute_30 --gpu-code=compute_30 pre_euler3d.cu -o pre_euler3d -I$(CUDA_SDK_PATH)/common/inc  -L$(CUDA_SDK_PATH)/lib $(CUTIL_LIB)
+	nvcc -Xptxas -v -O3 --gpu-architecture=compute_30 --gpu-code=compute_30 pre_euler3d.cu -o pre_euler3d -I$(CUDA_SDK_PATH)/common  -L$(CUDA_LIB_PATH) $(CUTIL_LIB)
 
 pre_euler3d_double: pre_euler3d_double.cu
-	nvcc -Xptxas -v -O3 --gpu-architecture=compute_30 --gpu-code=compute_30 pre_euler3d_double.cu -o pre_euler3d_double -I$(CUDA_SDK_PATH)/common/inc  -L$(CUDA_SDK_PATH)/lib $(CUTIL_LIB)
+	nvcc -Xptxas -v -O3 --gpu-architecture=compute_30 --gpu-code=compute_30 pre_euler3d_double.cu -o pre_euler3d_double -I$(CUDA_SDK_PATH)/common  -L$(CUDA_LIB_PATH) $(CUTIL_LIB)
 
 
 clean:

@@ -1,10 +1,7 @@
 BENCHMARKS NOT RUNNING-
-1. CFD
-2. mummergpu
-3. myocyte - double free
-4. hotspot3d
-5. huffman
-6. particlefinder - memcorrupt
+1. mummergpu
+2. myocyte - requires CUDA version 8
+3. particlefinder(float) - memcorrupt in kernel
 
 Rodinia Benchmark Suite 3.1
 ===========================

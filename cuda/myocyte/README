@@ -6,3 +6,6 @@
 // myocyte.out 100 100 1
 //
 // for more information see main.cu
+
+
+Does not run on cuda 10, runs on 8

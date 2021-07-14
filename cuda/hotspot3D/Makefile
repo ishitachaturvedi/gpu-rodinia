@@ -1,4 +1,4 @@
-include /scratch/ishitac/rodinia/common/make.config
+include /scratch/yc0769/benchmarks/gpu-rodinia/common/make.config
 
 CC := $(CUDA_DIR)/bin/nvcc --cudart shared
 
@@ -9,8 +9,8 @@ SRC = 3D.cu
 EXE = 3D 
 
 OUTPUT = *.out
-
-FLAGS = -g -G -arch sm_30 --ptxas-options=-v
+#--gpu-architecture=compute_30 --gpu-code=compute_30arch sm_30
+FLAGS = -arch sm_30 --ptxas-options=-v -lcudart
 release: $(SRC)
 	$(CC) $(KERNEL_DIM) $(FLAGS) $(SRC) -o $(EXE) -I$(INCLUDE) -L$(CUDA_LIB_DIR) 
 

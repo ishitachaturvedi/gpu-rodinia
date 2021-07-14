@@ -36,7 +36,7 @@ main.o:	define.c \
 				file.c \
 				timer.c
 	nvcc	main.cu \
-				-c -O3 -g --cudart shared
+				-c -O3 --cudart shared -lcudart
 
 # delete all object files
 clean:

@@ -5,9 +5,9 @@ CC = g++
 
 CUDA_INCLUDEPATH=$(CUDA_DIR)/include
 
-#NVCC_OPTS=-O3 -arch=sm_30 -Xcompiler -m64 -g -G --cudart shared
+#NVCC_OPTS=-O3 -arch=sm_30 -Xcompiler -m64 -g -G --cudart shared -lcudart
 
-NVCC_OPTS=-O3  --cudart shared
+NVCC_OPTS=-O3  --cudart shared -lcudart
 
 GCC_OPTS=-O3
 
