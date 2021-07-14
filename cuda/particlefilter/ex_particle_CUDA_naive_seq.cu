@@ -225,6 +225,7 @@ void strelDisk(int * disk, int radius)
 	for(x = 0; x < diameter; x++){
 		for(y = 0; y < diameter; y++){
 			double distance = sqrt(pow((double)(x-radius+1),2) + pow((double)(y-radius+1),2));
+      printf("distance: %f\n", distance);
 			if(distance < radius)
 			disk[x*diameter + y] = 1;
 		}
@@ -299,6 +300,7 @@ void getneighbors(int * se, int numOnes, double * neighbors, int radius){
 	int neighY = 0;
 	int center = radius - 1;
 	int diameter = radius*2 -1;
+  printf("numOnes: %d\n", numOnes);
 	for(x = 0; x < diameter; x++){
 		for(y = 0; y < diameter; y++){
 			if(se[x*diameter + y]){
@@ -417,6 +419,7 @@ void particleFilter(int * I, int IszX, int IszY, int Nfr, int * seed, int Nparti
 	int radius = 5;
 	int diameter = radius*2 - 1;
 	int * disk = (int *)malloc(diameter*diameter*sizeof(int));
+  for(int a = 0; a < diameter*diameter; a++) {disk[a]=0;}
 	strelDisk(disk, radius);
 	int countOnes = 0;
 	int x, y;
@@ -431,6 +434,7 @@ void particleFilter(int * I, int IszX, int IszY, int Nfr, int * seed, int Nparti
 	
 	long long get_neighbors = get_time();
 	printf("TIME TO GET NEIGHBORS TOOK: %f\n", elapsed_time(start, get_neighbors));
+  printf("Size of: %d\n", sizeof(double)*Nparticles);
 	//initial weights are all equal (1/Nparticles)
 	double * weights = (double *)malloc(sizeof(double)*Nparticles);
 	for(x = 0; x < Nparticles; x++){

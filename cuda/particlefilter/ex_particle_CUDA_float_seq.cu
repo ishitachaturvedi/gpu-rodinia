@@ -56,6 +56,7 @@ void check_error(cudaError e) {
 void cuda_print_double_array(double *array_GPU, size_t size) {
     //allocate temporary array for printing
     double* mem = (double*) malloc(sizeof (double) *size);
+    for(int ind = 0; ind < size; ind++) { mem[ind] = 0; }
 
     //transfer data from device
     cudaMemcpy(mem, array_GPU, sizeof (double) *size, cudaMemcpyDeviceToHost);
@@ -578,6 +579,7 @@ void videoSequence(unsigned char * I, int IszX, int IszY, int Nfr, int * seed) {
 
     /*dilate matrix*/
     unsigned char * newMatrix = (unsigned char *) malloc(sizeof (unsigned char) * IszX * IszY * Nfr);
+    for(int ind = 0; ind < IszX*IszY*Nfr; ind++) { newMatrix[ind] = 0; }
     imdilate_disk(I, IszX, IszY, Nfr, 5, newMatrix);
     int x, y;
     for (x = 0; x < IszX; x++) {
@@ -641,7 +643,8 @@ void particleFilter(unsigned char * I, int IszX, int IszY, int Nfr, int * seed, 
     int radius = 5;
     int diameter = radius * 2 - 1;
     int * disk = (int*) malloc(diameter * diameter * sizeof (int));
-    strelDisk(disk, radius);
+    for(int ind = 0; ind < diameter*diameter; ind++) { disk[ind] = 0; }
+    strelDisk(disk, radius); 
     int countOnes = 0;
     int x, y;
     for (x = 0; x < diameter; x++) {
@@ -651,20 +654,28 @@ void particleFilter(unsigned char * I, int IszX, int IszY, int Nfr, int * seed, 
         }
     }
     int * objxy = (int *) malloc(countOnes * 2 * sizeof (int));
+    for(int ind = 0; ind < countOnes*2; ind++) { objxy[ind] = 0; }
     getneighbors(disk, countOnes, objxy, radius);
     //initial weights are all equal (1/Nparticles)
     double * weights = (double *) malloc(sizeof (double) *Nparticles);
+    for(int ind = 0; ind < Nparticles; ind++) { weights[ind] = 0; }
     for (x = 0; x < Nparticles; x++) {
         weights[x] = 1 / ((double) (Nparticles));
     }
 
     //initial likelihood to 0.0
     double * likelihood = (double *) malloc(sizeof (double) *Nparticles);
+    for(int ind = 0; ind < Nparticles; ind++) { likelihood[ind] = 0; }
     double * arrayX = (double *) malloc(sizeof (double) *Nparticles);
+    for(int ind = 0; ind < Nparticles; ind++) { arrayX[ind] = 0; }
     double * arrayY = (double *) malloc(sizeof (double) *Nparticles);
+    for(int ind = 0; ind < Nparticles; ind++) { arrayY[ind] = 0; }
     double * xj = (double *) malloc(sizeof (double) *Nparticles);
+    for(int ind = 0; ind < Nparticles; ind++) { xj[ind] = 0; }
     double * yj = (double *) malloc(sizeof (double) *Nparticles);
+    for(int ind = 0; ind < Nparticles; ind++) { yj[ind] = 0; }
     double * CDF = (double *) malloc(sizeof (double) *Nparticles);
+    for(int ind = 0; ind < Nparticles; ind++) { CDF[ind] = 0; }
 
     //GPU copies of arrays
     double * arrayX_GPU;
@@ -678,8 +689,10 @@ void particleFilter(unsigned char * I, int IszX, int IszY, int Nfr, int * seed, 
     int * objxy_GPU;
 
     int * ind = (int*) malloc(sizeof (int) *countOnes * Nparticles);
+    for(int indx = 0; indx < countOnes*Nparticles; indx++) { ind[indx] = 0; }
     int * ind_GPU;
     double * u = (double *) malloc(sizeof (double) *Nparticles);
+    for(int indx = 0; indx < Nparticles; indx++) { u[indx] = 0; }
     double * u_GPU;
     int * seed_GPU;
     double* partial_sums;
@@ -730,12 +743,16 @@ void particleFilter(unsigned char * I, int IszX, int IszY, int Nfr, int * seed, 
     for (k = 1; k < Nfr; k++) {
         
         likelihood_kernel << < num_blocks, threads_per_block >> > (arrayX_GPU, arrayY_GPU, xj_GPU, yj_GPU, CDF_GPU, ind_GPU, objxy_GPU, likelihood_GPU, I_GPU, u_GPU, weights_GPU, Nparticles, countOnes, max_size, k, IszY, Nfr, seed_GPU, partial_sums);
+        printf("likelihood kernel done\n");
 
         sum_kernel << < num_blocks, threads_per_block >> > (partial_sums, Nparticles);
+        printf("sum kernel done\n");
 
         normalize_weights_kernel << < num_blocks, threads_per_block >> > (weights_GPU, Nparticles, partial_sums, CDF_GPU, u_GPU, seed_GPU);
+        printf("normalize_weights kernel done\n");
         
         find_index_kernel << < num_blocks, threads_per_block >> > (arrayX_GPU, arrayY_GPU, CDF_GPU, u_GPU, xj_GPU, yj_GPU, weights_GPU, Nparticles);
+        printf("find_index kernel done\n");
 
     }//end loop
 
@@ -753,6 +770,7 @@ void particleFilter(unsigned char * I, int IszX, int IszY, int Nfr, int * seed, 
     cudaFree(ind_GPU);
     cudaFree(seed_GPU);
     cudaFree(partial_sums);
+    printf("cudaFree done\n");
 
     long long free_time = get_time();
     check_error(cudaMemcpy(arrayX, arrayX_GPU, sizeof (double) *Nparticles, cudaMemcpyDeviceToHost));
@@ -857,11 +875,15 @@ int main(int argc, char * argv[]) {
     }
     //establish seed
     int * seed = (int *) malloc(sizeof (int) *Nparticles);
+    for(int indx = 0; indx < Nparticles; indx++) { seed[indx] = 0; }
+    if(!seed) {exit(1);}
     int i;
     for (i = 0; i < Nparticles; i++)
         seed[i] = time(0) * i;
     //malloc matrix
     unsigned char * I = (unsigned char *) malloc(sizeof (unsigned char) *IszX * IszY * Nfr);
+    for(int indx = 0; indx < IszX*IszY*Nfr; indx++) { I[indx] = 0; }
+    if(!I) {exit(1);}
     long long start = get_time();
     //call video sequence
     videoSequence(I, IszX, IszY, Nfr, seed);
